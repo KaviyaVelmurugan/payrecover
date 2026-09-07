@@ -28,13 +28,13 @@ Help a merchant answer three questions:
 
 ## Delivery phases
 
-### Phase 1 — foundation (current)
+### Phase 1 — foundation (complete)
 
 Product shell, recovery simulator, domain vocabulary, durable schema, responsive UI, and project documentation.
 
-### Phase 2 — commerce lifecycle
+### Phase 2 — commerce lifecycle (complete)
 
-Persist products, carts, orders, and payment attempts. Add server-side totals and order-status APIs.
+Persist products, orders, order items, and payment attempts. Calculate totals from server-owned product prices and expose dashboard aggregation APIs. The cart remains intentionally browser-local until an order is submitted.
 
 ### Phase 3 — Adyen test integration
 

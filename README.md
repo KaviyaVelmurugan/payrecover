@@ -5,9 +5,11 @@ PayRecover is a beginner-friendly FinTech + MarTech project for independent onli
 ## Current milestone
 
 - Merchant payment-health dashboard
-- Customer demo storefront
-- Interactive failed-card to UPI recovery simulation
-- D1/SQLite schema for orders, payment attempts, webhook events, and checkout analytics
+- Persistent six-product demo storefront and quantity-based cart
+- Server-priced order creation with customer and campaign context
+- Persistent failed-card to UPI recovery journey
+- Live dashboard aggregation from orders and payment attempts
+- D1/SQLite migrations for products, orders, items, attempts, webhooks, and analytics
 - Adyen-ready architecture with no live credentials required
 
 All visible numbers are clearly marked as demo data. No real payments are processed yet.
@@ -23,7 +25,7 @@ Open `http://localhost:3000`.
 
 ## Architecture
 
-The React/Vinext interface runs on Cloudflare Workers through Sites. Durable structured data uses D1. Payment-provider integration will sit behind server routes so API and HMAC secrets never reach the browser.
+The React/Vinext interface runs on Cloudflare Workers through Sites. Durable structured data uses D1. Catalog, order, payment-simulation, and dashboard APIs run server-side. The future payment-provider integration will remain behind server routes so API and HMAC secrets never reach the browser.
 
 See `docs/PROJECT.md` for scope, rules, and the phased implementation plan.
 

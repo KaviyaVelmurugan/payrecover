@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1788788373843,
+      "tag": "0000_volatile_the_fury",
+      "breakpoints": true
+    }
+  ]
+}
