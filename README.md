@@ -26,3 +26,11 @@ Open `http://localhost:3000`.
 The React/Vinext interface runs on Cloudflare Workers through Sites. Durable structured data uses D1. Payment-provider integration will sit behind server routes so API and HMAC secrets never reach the browser.
 
 See `docs/PROJECT.md` for scope, rules, and the phased implementation plan.
+
+## Security
+
+PayRecover currently simulates payment outcomes and does not process real money. Do not commit API keys, webhook secrets, payment credentials, or production customer data. Please read [SECURITY.md](SECURITY.md) before reporting a vulnerability.
+
+## License
+
+This project is available under the [MIT License](LICENSE). Copyright © 2026 KaviyaVelmurugan.
