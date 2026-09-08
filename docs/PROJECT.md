@@ -36,13 +36,13 @@ Product shell, recovery simulator, domain vocabulary, durable schema, responsive
 
 Persist products, orders, order items, and payment attempts. Calculate totals from server-owned product prices and expose dashboard aggregation APIs. The cart remains intentionally browser-local until an order is submitted.
 
-### Phase 3 — Adyen test integration
+### Phase 3 — Adyen test integration (complete)
 
-Create Sessions, render embedded checkout, validate HMAC webhooks, implement idempotency, and reconcile redirects with final webhook outcomes.
+Creates server-side Sessions, renders embedded Drop-in, validates HMAC webhooks, keeps idempotency keys per attempt, deduplicates notifications, and treats final webhook outcomes as authoritative. A simulator fallback keeps the learning path usable without credentials.
 
-### Phase 4 — recovery intelligence
+### Phase 4 — recovery intelligence (started)
 
-Classify safe failure categories, recommend eligible alternatives, record retries, and calculate recovered revenue.
+The first transparent rule recommends changing payment method after a decline. Next, expand failure classification, eligibility rules, retry tracking, and recovery-performance reporting.
 
 ### Phase 5 — MarTech analytics
 

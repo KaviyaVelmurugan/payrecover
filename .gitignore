@@ -1,5 +1,6 @@
 # dependencies
 /node_modules
+/.npm-cache/
 /.pnp
 .pnp.*
 .yarn/*
@@ -28,6 +29,7 @@ yarn-error.log*
 
 # local environment
 .env*
+!.env.example
 
 # deployment and generated files
 .vercel
