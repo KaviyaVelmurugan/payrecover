@@ -2,7 +2,7 @@
 
 PayRecover is a beginner-friendly FinTech + MarTech project for independent online merchants. It demonstrates how a checkout can preserve an order after a failed payment, recommend a safe retry, and measure recovered revenue.
 
-## Current milestone — Phase 4
+## Current milestone — Phase 5 (complete)
 
 - Merchant payment-health dashboard
 - Persistent six-product demo storefront and quantity-based cart
@@ -17,6 +17,10 @@ PayRecover is a beginner-friendly FinTech + MarTech project for independent onli
 - Safe retry eligibility, method, and timing decisions
 - Risk-block protection that prevents automated retries
 - Retry-success and failure-distribution analytics
+- UTM campaign attribution from visit through paid order
+- Persistent checkout-funnel events by shopper session
+- Payment-method conversion reporting
+- Deterministic A/B test for recovery-message conversion
 - Simulator fallback when Adyen test credentials are not configured
 
 All visible numbers are test data. Production payments are intentionally unsupported.
@@ -29,6 +33,8 @@ npm run dev
 ```
 
 Open `http://localhost:3000`.
+
+To demonstrate campaign attribution, open a URL such as `http://localhost:3000/?utm_campaign=summer_social`, complete a test order, and return to the merchant dashboard.
 
 Copy `.env.example` to `.env.local` and add credentials from your Adyen test Customer Area to activate Drop-in. Register the Standard webhook URL as `/api/adyen/webhooks`, enable HMAC signing, and put its hexadecimal HMAC key in `ADYEN_HMAC_KEY`. Without these values, PayRecover stays in its fully working simulator mode.
 

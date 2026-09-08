@@ -8,6 +8,13 @@
       "when": 1788788373843,
       "tag": "0000_volatile_the_fury",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1788858022230,
+      "tag": "0001_parallel_maximus",
+      "breakpoints": true
     }
   ]
 }

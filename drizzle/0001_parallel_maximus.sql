@@ -1,0 +1,1 @@
+ALTER TABLE `checkout_events` ADD `experiment_variant` text;

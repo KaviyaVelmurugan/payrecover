@@ -44,9 +44,13 @@ Creates server-side Sessions, renders embedded Drop-in, validates HMAC webhooks,
 
 Classifies declined payments, insufficient funds, expired cards, temporary technical errors, and risk blocks. Each category receives an explainable eligibility, timing, and payment-method decision. Risk blocks are never automatically retried. The dashboard reports classified failures and retry success.
 
-### Phase 5 — MarTech analytics
+### Phase 5 — MarTech analytics (complete)
 
-Add campaign attribution, checkout funnel events, method-level conversion, and one controlled experiment.
+Captures campaign-aware checkout events from store view through payment completion, reports revenue by campaign and payment-method conversion, and runs a stable 50/50 recovery-message experiment per shopper session.
+
+## Completed portfolio scope
+
+PayRecover now demonstrates the full learning project: durable commerce data, Adyen test checkout architecture, authenticated webhook reconciliation, safe payment recovery rules, and measurable MarTech attribution and experimentation. Production payments, automated messaging, and merchant authentication remain intentionally outside this educational version.
 
 ## Initial success metrics
 
