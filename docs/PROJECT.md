@@ -40,9 +40,9 @@ Persist products, orders, order items, and payment attempts. Calculate totals fr
 
 Creates server-side Sessions, renders embedded Drop-in, validates HMAC webhooks, keeps idempotency keys per attempt, deduplicates notifications, and treats final webhook outcomes as authoritative. A simulator fallback keeps the learning path usable without credentials.
 
-### Phase 4 — recovery intelligence (started)
+### Phase 4 — recovery intelligence (complete)
 
-The first transparent rule recommends changing payment method after a decline. Next, expand failure classification, eligibility rules, retry tracking, and recovery-performance reporting.
+Classifies declined payments, insufficient funds, expired cards, temporary technical errors, and risk blocks. Each category receives an explainable eligibility, timing, and payment-method decision. Risk blocks are never automatically retried. The dashboard reports classified failures and retry success.
 
 ### Phase 5 — MarTech analytics
 

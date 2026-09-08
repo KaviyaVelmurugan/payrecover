@@ -1,5 +1,6 @@
 import { getRawDb } from '@/db/raw';
 import { getAdyenConfig, type AdyenNotification, verifyAdyenHmac } from '@/lib/adyen';
+import { classifyFailure } from '@/lib/recovery';
 
 type NotificationEnvelope = { NotificationRequestItem?: AdyenNotification };
 
@@ -30,7 +31,7 @@ export async function POST(request: Request) {
         db.prepare('INSERT INTO webhook_events (id, event_code, provider_reference, payload, hmac_verified, processed_at, received_at) VALUES (?, ?, ?, ?, ?, ?, ?)').bind(crypto.randomUUID(), item.eventCode!, item.pspReference!, JSON.stringify(item), 1, now, now),
       ];
       if (authorised || refused) {
-        statements.push(db.prepare("UPDATE payment_attempts SET provider_reference = ?, method = COALESCE(?, method), status = ?, failure_category = ?, updated_at = ? WHERE id = (SELECT id FROM payment_attempts WHERE order_id = ? AND provider = 'adyen' ORDER BY created_at DESC LIMIT 1)").bind(item.pspReference!, item.paymentMethod ?? null, authorised ? 'authorised' : 'refused', refused ? 'payment_method_declined' : null, now, item.merchantReference!));
+        statements.push(db.prepare("UPDATE payment_attempts SET provider_reference = ?, method = COALESCE(?, method), status = ?, failure_category = ?, updated_at = ? WHERE id = (SELECT id FROM payment_attempts WHERE order_id = ? AND provider = 'adyen' ORDER BY created_at DESC LIMIT 1)").bind(item.pspReference!, item.paymentMethod ?? null, authorised ? 'authorised' : 'refused', refused ? classifyFailure(item.additionalData?.refusalReasonRaw) : null, now, item.merchantReference!));
         statements.push(db.prepare('UPDATE orders SET status = ?, updated_at = ? WHERE id = ?').bind(authorised ? 'paid' : 'failed', now, item.merchantReference!));
       }
       await db.batch(statements);

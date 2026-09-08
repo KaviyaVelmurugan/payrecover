@@ -16,7 +16,7 @@ function hexToBytes(hex: string) {
 }
 
 export type AdyenNotification = {
-  additionalData?: { hmacSignature?: string };
+  additionalData?: { hmacSignature?: string; refusalReasonRaw?: string };
   amount?: { value?: number; currency?: string };
   eventCode?: string;
   merchantAccountCode?: string;

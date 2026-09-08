@@ -2,7 +2,7 @@
 
 PayRecover is a beginner-friendly FinTech + MarTech project for independent online merchants. It demonstrates how a checkout can preserve an order after a failed payment, recommend a safe retry, and measure recovered revenue.
 
-## Current milestone — Phase 3
+## Current milestone — Phase 4
 
 - Merchant payment-health dashboard
 - Persistent six-product demo storefront and quantity-based cart
@@ -13,7 +13,10 @@ PayRecover is a beginner-friendly FinTech + MarTech project for independent onli
 - Real Adyen test Sessions endpoint and embedded Web Drop-in
 - HMAC-verified, duplicate-safe Adyen Standard webhook endpoint
 - Webhook-authoritative order and attempt reconciliation
-- Rule-based recovery recommendation after a declined attempt
+- Explainable recovery engine for five failure categories
+- Safe retry eligibility, method, and timing decisions
+- Risk-block protection that prevents automated retries
+- Retry-success and failure-distribution analytics
 - Simulator fallback when Adyen test credentials are not configured
 
 All visible numbers are test data. Production payments are intentionally unsupported.
