@@ -20,6 +20,17 @@ import { useEffect, useMemo, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -251,15 +262,20 @@ function Dashboard() {
         </nav>
       </aside>
       <section className="min-w-0 space-y-6">
-        <div>
-          <p className="text-sm font-medium text-primary">Merchant workspace</p>
-          <h1 className="mt-1 text-3xl font-bold tracking-[-0.04em] sm:text-4xl">
-            Payment health
-          </h1>
-          <p className="mt-2 text-muted-foreground">
-            Transparent recovery rules turn payment failures into safe next
-            actions.
-          </p>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-sm font-medium text-primary">
+              Merchant workspace
+            </p>
+            <h1 className="mt-1 text-3xl font-bold tracking-[-0.04em] sm:text-4xl">
+              Payment health
+            </h1>
+            <p className="mt-2 text-muted-foreground">
+              Transparent recovery rules turn payment failures into safe next
+              actions.
+            </p>
+          </div>
+          <DemoReset />
         </div>
         {error && (
           <div className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">
@@ -1303,6 +1319,43 @@ function MarketingAnalytics({ data }: { data: DashboardData | null }) {
         </div>
       </div>
     </section>
+  );
+}
+function DemoReset() {
+  const [busy, setBusy] = useState(false);
+  const reset = async () => {
+    setBusy(true);
+    const response = await fetch('/api/demo/reset', { method: 'DELETE' });
+    if (response.ok) window.location.reload();
+    else setBusy(false);
+  };
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger render={<Button variant="outline" size="sm" />}>
+        <Trash2 /> Reset demo data
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Reset all demo activity?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This permanently removes test orders, payment attempts, webhook
+            records, and analytics events. The product catalogue remains
+            available.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel disabled={busy}>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            variant="destructive"
+            disabled={busy}
+            onClick={() => void reset()}
+          >
+            {busy ? <LoaderCircle className="animate-spin" /> : <Trash2 />}{' '}
+            Reset demo data
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
 function AttemptTable({

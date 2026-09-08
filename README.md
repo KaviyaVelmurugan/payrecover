@@ -2,6 +2,8 @@
 
 PayRecover is a beginner-friendly FinTech + MarTech project for independent online merchants. It demonstrates how a checkout can preserve an order after a failed payment, recommend a safe retry, and measure recovered revenue.
 
+**Live demo:** [payrecover-demo.kashvivelmurugan.chatgpt.site](https://payrecover-demo.kashvivelmurugan.chatgpt.site/)
+
 ## Current milestone — Phase 5 (complete)
 
 - Merchant payment-health dashboard
@@ -29,6 +31,7 @@ All visible numbers are test data. Production payments are intentionally unsuppo
 
 ```bash
 npm install
+npm test
 npm run dev
 ```
 
@@ -41,6 +44,40 @@ Copy `.env.example` to `.env.local` and add credentials from your Adyen test Cus
 ## Architecture
 
 The React/Vinext interface runs on Cloudflare Workers through Sites. Durable structured data uses D1. Catalog, order, payment, webhook, recommendation, and dashboard APIs run server-side. Only Adyen's public client key reaches the browser; API and HMAC secrets stay in server runtime variables.
+
+```mermaid
+flowchart LR
+  Shopper[Shopper storefront] --> Orders[Server-priced order API]
+  Orders --> D1[(D1 / SQLite)]
+  Orders --> Checkout[Adyen test Sessions]
+  Checkout --> DropIn[Embedded Drop-in]
+  Adyen[Adyen webhook] --> Verify[HMAC verification]
+  Verify --> D1
+  D1 --> Rules[Recovery decision engine]
+  Rules --> Shopper
+  D1 --> Dashboard[Merchant dashboard]
+  Events[Campaign + funnel events] --> D1
+```
+
+## Business value
+
+- Preserves the order when the first payment fails.
+- Prevents unsafe retries for risk-blocked payments.
+- Connects every retry to its original attempt.
+- Separates provisional browser feedback from authoritative webhook status.
+- Attributes paid and recovered revenue to marketing campaigns.
+- Measures whether a recovery message changes shopper behavior.
+
+## Portfolio talking points
+
+1. **FinTech:** server-owned pricing, idempotent attempts, signed webhooks, provider reconciliation, and safe retry eligibility.
+2. **MarTech:** UTM attribution, session funnels, method conversion, recovered revenue, and deterministic experimentation.
+3. **Product judgment:** simulator fallback makes the full learning journey usable without secrets while the real Adyen test integration remains ready.
+4. **Safety:** no raw payment credentials are stored, risk blocks cannot be automatically retried, and demo deletion requires explicit confirmation.
+
+## Quality checks
+
+`npm test` covers recovery classification, risk safeguards, event vocabulary, and stable experiment assignment. `npm run build` performs the production compilation. The deployed dashboard is private to its owner; this is the merchant-access boundary for the portfolio demo.
 
 See `docs/PROJECT.md` for scope, rules, and the phased implementation plan.
 

@@ -4,10 +4,10 @@
 
 PayRecover is currently an early-stage educational project. Security fixes are applied to the latest version on the `main` branch.
 
-| Version | Supported |
-| --- | --- |
-| Latest `main` | Yes |
-| Older commits or forks | No |
+| Version                | Supported |
+| ---------------------- | --------- |
+| Latest `main`          | Yes       |
+| Older commits or forks | No        |
 
 ## Reporting a vulnerability
 
@@ -26,4 +26,4 @@ You should receive an acknowledgement within seven days. Confirmed issues will b
 
 ## Security scope
 
-The current application uses simulated payment outcomes and does not process real money. Never commit payment API keys, webhook secrets, customer payment credentials, or production data to this repository.
+The application supports simulated outcomes and Adyen test mode only; it must not process real money. API and HMAC keys belong only in protected runtime environment variables. The public Adyen client key is sent to the browser, while server secrets never are. Standard webhook messages are HMAC-verified and deduplicated before changing payment state. Never commit payment API keys, webhook secrets, customer payment credentials, or production data to this repository.
